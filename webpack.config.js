@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: "./js/AuthForm.js",
+    entry: __dirname + "/public/js/AuthForm.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname + "public/src")
