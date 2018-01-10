@@ -1,0 +1,26 @@
+.authForm{
+  position: relative;
+  padding: 44px;
+  width: 35%;
+  left: 31%;
+  top: 222px;
+  h1{
+    margin-left: 22%;
+  }
+  #content{
+    margin-left: 22%;
+  }
+  .authForm-button{
+    margin: 12px;
+  }
+  .authForm-input{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+  }
+}
