@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/server.js",
-    "webpack": "npx webpack --config webpack.config.js"
+    "webpack-dev": "npx webpack --config webpack.dev.js",
+    "webpack-prod": "npx webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -26,12 +27,16 @@
     "koa-session": "^5.5.1",
     "koa-static": "^4.0.2",
     "koa-views": "^6.1.3",
+    "lodash": "^4.17.4",
+    "material-ui": "^0.20.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "pug": "^2.0.0-rc.4",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-tap-event-plugin": "^3.0.2",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -40,8 +45,10 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.17",
     "eslint": "^4.15.0",
     "eslint-plugin-react": "^7.5.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
   }
 }
