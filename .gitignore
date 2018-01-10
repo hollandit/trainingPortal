@@ -3,3 +3,6 @@
 .eslintrc.js
 .babelrc
 /public/client/
+/public/.sass-cache/
+/public/css/
+/public/config.rb
