@@ -29,7 +29,9 @@ class UserForm extends React.Component{
                         <TextField
                             hintText="Введите логин"
                             name="login"
+                            fullWidth={true}
                             value={login}
+                            required={true}
                             onChange={this.handleChange}
                         />
                     </MuiThemeProvider>
@@ -38,7 +40,9 @@ class UserForm extends React.Component{
                             hintText="Введите пароль"
                             type="password"
                             name="password"
+                            fullWidth={true}
                             value={password}
+                            required={true}
                             onChange={this.handleChange}
                         />
                     </MuiThemeProvider>
