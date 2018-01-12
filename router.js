@@ -1,6 +1,7 @@
 const Router = require('koa-router'),
     passport = require('./bin/passport'),
     User = require('./model/user'),
+    Test = require('./model/test'),
     router = new Router();
 
 router
@@ -18,15 +19,46 @@ router
         user.position = await User.position(user.position).then(position => {
             return position;
         });
-        let themes = await User.theme(user.id).then(theme => {
-            console.log(theme);
-            return theme;
-        });
+        let themes = await User.theme(user.id);
         await ctx.render('index', {
             title: 'Главная страница',
+            path: 'index',
             userBy: user,
             themes: themes,
         });
+    })
+    .get('/training', async ctx => {
+        ctx.body = 'Training';
+    })
+    .get('/testing', async ctx => {
+        let user = ctx.state.user[0];
+        let themes = await User.theme(user.id);
+        await ctx.render('testing', {
+            title: 'Тестирование',
+            path: 'testing',
+            themes: themes
+        })
+    })
+    .get('/testing/:id', async ctx => {
+        let answearArr = [];
+        let answerCorrectArr = [];
+        let test = await Test.test(ctx.params.id);
+        for(i=0; i < test.length; i++){
+            let answear = test[i].id;
+            answearArr.push(await Test.answear(answear));
+        }
+        for(i=0; i < answearArr.length; i++){
+            let arr = answearArr[i];
+            for(n=0; n < arr.length; n++){
+                let arr1 = arr[n];
+                if(arr1.answer === 1){
+                    answerCorrectArr.push(arr1.id);
+                }
+            }
+        }
+        console.log(test);
+        console.log(answearArr);
+        console.log(answerCorrectArr);
     })
     .get('/logout', async ctx => {
         if (ctx.isAuthenticated()) {
