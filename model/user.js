@@ -19,7 +19,7 @@ function requestUser(sql, req){
                 if(err) reject(err);
                 resolve(rows);
             });
-    });
+    }).then(rows => {return rows;});
 }
 
 module.exports = User;
