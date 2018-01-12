@@ -1,0 +1,20 @@
+nav.navbar.navbar-light.bg-faded
+    h1.navbar-brand Holland
+    ul.nav.navbar-nav
+        li.nav-item.active
+            a.nav-link(href='#')
+                | Главная страница
+                span.sr-only (current)
+        li.nav-item
+            a.nav-link(href='#') База знаний
+        li.nav-item
+            a.nav-link(href='#') Тренинги
+        li.nav-item
+            a.nav-link(href='#') Тестирование
+        li.nav-item
+            form.form-inline
+                input.form-control(type='text', placeholder='Поиск')
+                button.btn.btn-outline-success(type='submit') Найти
+        li.nav-item.pull-xs-right
+            a.nav-link(href='/logout') Выйти
+
