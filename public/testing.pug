@@ -1,0 +1,7 @@
+include layout
+    include header
+    .container
+        h1=title
+        each theme in themes
+            p
+                a(href=`/testing/${theme.id_theme}`)=theme.name
