@@ -6,6 +6,9 @@ let Test = {
     },
     answear: function(id){
         return requestTest('SELECT * FROM answers WHERE id_question = ?', id);
+    },
+    theme: function(id){
+        return requestTest('SELECT name FROM thema WHERE id = ?', id);
     }
 };
 

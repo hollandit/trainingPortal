@@ -40,25 +40,37 @@ router
         })
     })
     .get('/testing/:id', async ctx => {
-        let answearArr = [];
-        let answerCorrectArr = [];
+        // let answearArr = [];
+        // let answerCorrectArr = [];
+        let theme = await Test.theme(ctx.params.id);
         let test = await Test.test(ctx.params.id);
-        for(i=0; i < test.length; i++){
-            let answear = test[i].id;
-            answearArr.push(await Test.answear(answear));
-        }
-        for(i=0; i < answearArr.length; i++){
-            let arr = answearArr[i];
-            for(n=0; n < arr.length; n++){
-                let arr1 = arr[n];
-                if(arr1.answer === 1){
-                    answerCorrectArr.push(arr1.id);
-                }
-            }
-        }
-        console.log(test);
+        let answearArr = await Promise.all(test.map(item => {
+            console.log(item.name);
+            return item.id
+        })).then(id => id);
         console.log(answearArr);
-        console.log(answerCorrectArr);
+        // console.log(answearArr);
+        // for(i=0; i < test.length; i++){
+        //     let answear = test[i].id;
+        //     answearArr.push(await Test.answear(answear));
+        // }
+        // for(i=0; i < answearArr.length; i++){
+        //     let arr = answearArr[i];
+        //     for(n=0; n < arr.length; n++){
+        //         let arr1 = arr[n];
+        //         if(arr1.answer === 1){
+        //             answerCorrectArr.push(arr1.id);
+        //         }
+        //     }
+        // }
+        // console.log(answerCorrectArr);
+        await ctx.render('test', {
+            title: 'Тест',
+            path: 'test',
+            // thema: theme[0],
+            // test: test,
+            // answear: answearArr,
+        })
     })
     .get('/logout', async ctx => {
         if (ctx.isAuthenticated()) {
