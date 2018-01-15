@@ -49,7 +49,6 @@ router
             return item.id
         })).then(id => id);
         console.log(answearArr);
-        // console.log(answearArr);
         // for(i=0; i < test.length; i++){
         //     let answear = test[i].id;
         //     answearArr.push(await Test.answear(answear));
