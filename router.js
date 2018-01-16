@@ -4,6 +4,21 @@ const Router = require('koa-router'),
     Test = require('./model/test'),
     router = new Router();
 
+function rand_array(min, max, array) {
+    let m = [];
+    for (let i = min; i < max + 1; i++) {
+        m.push(array[i]);
+    }
+    let res = [];
+    let len = m.length;
+    while (len) {
+        let idx = Math.floor(Math.random() * len);
+        res.push(m.splice(idx, 1)[0]);
+        len--;
+    }
+    return res;
+}
+
 router
     .get('/', async ctx => {
         if(ctx.isAuthenticated()){
@@ -40,35 +55,21 @@ router
         })
     })
     .get('/testing/:id', async ctx => {
-        // let answearArr = [];
-        // let answerCorrectArr = [];
         let theme = await Test.theme(ctx.params.id);
         let test = await Test.test(ctx.params.id);
         let answearArr = await Promise.all(test.map(item => {
-            console.log(item.name);
-            return item.id
-        })).then(id => id);
-        console.log(answearArr);
-        // for(i=0; i < test.length; i++){
-        //     let answear = test[i].id;
-        //     answearArr.push(await Test.answear(answear));
-        // }
-        // for(i=0; i < answearArr.length; i++){
-        //     let arr = answearArr[i];
-        //     for(n=0; n < arr.length; n++){
-        //         let arr1 = arr[n];
-        //         if(arr1.answer === 1){
-        //             answerCorrectArr.push(arr1.id);
-        //         }
-        //     }
-        // }
-        // console.log(answerCorrectArr);
+            return Test.answear(item.id);
+        }));
+
+        for(let n=0; n<answearArr.length; n++){
+            test[n].answer = answearArr[n];
+        }
+
         await ctx.render('test', {
             title: 'Тест',
             path: 'test',
-            // thema: theme[0],
-            // test: test,
-            // answear: answearArr,
+            thema: theme[0],
+            test: rand_array(0, 2, test),
         })
     })
     .get('/logout', async ctx => {
