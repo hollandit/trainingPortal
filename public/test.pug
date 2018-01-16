@@ -1,11 +1,16 @@
-//include layout
-//    .container
-//        h1=thema.name
-//        for question in test
-//            p=question.name
-//            for answearTest in answear
-//                ul
-//                    li
-//                        input(type='radio' name=answearTest)
-//                        | #{answearTest[0].text}
-                        // - console.log(answearTest)
+mixin question(number)
+    .question(data-key=number)
+        p=test[number].name
+        ul
+            each answear in test[number].answer
+                li
+                    input(type='radio' name=answear.id_question)
+                    | #{answear.text}
+        button Ответить
+include layout
+    .container
+        h1=thema.name
+        form
+            +question(0)
+            +question(1)
+            +question(2)
