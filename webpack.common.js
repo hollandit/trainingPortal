@@ -3,7 +3,7 @@ const path = require("path"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: __dirname + "/public/js/AuthForm.js",
+    entry: __dirname + "/public/js/component/AuthForm.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname + "/public/client")
