@@ -2,7 +2,8 @@
 /node_modules/
 .eslintrc.js
 .babelrc
-/public/client/
+/public/client/bundle.js
+/public/client/bundle.js.map
 /public/.sass-cache/
 /public/css/
 /public/config.rb
