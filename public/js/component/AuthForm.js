@@ -13,18 +13,24 @@ class UserForm extends React.Component{
         password: "",
     };
 
+    handleSubmit = e => {
+        e.preventDefault();
+    };
+
     handleChange = e => {
         const { name, value } = e.target;
 
         this.setState({
             [name]: value,
         });
-    }
+    };
+
     render(){
         const { login, password } = this.state;
         return(
-            <div>
-                <form method='post' action="/">
+            <div className='authForm'>
+                <h1>Авторизация</h1>
+                <form onSubmit={this.handleSubmit}>
                     <MuiThemeProvider>
                         <TextField
                             hintText="Введите логин"
