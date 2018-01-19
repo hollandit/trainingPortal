@@ -1,16 +1,18 @@
-mixin question(number)
-    .question(data-key=number)
-        p=test[number].name
-        ul
-            each answear in test[number].answer
-                li
-                    input(type='radio' name=answear.id_question)
-                    | #{answear.text}
-        button Ответить
+//mixin question(number)
+//    .question(id=number)
+//        p=test[number].name
+//        ul
+//            each answear in test[number].answer
+//                li
+//                    input(type='radio' name=answear.id_question)
+//                    | #{answear.text}
+//        button.buttonTest Ответить
 include layout
     .container
-        h1=thema.name
-        form
-            +question(0)
-            +question(1)
-            +question(2)
+        //h1=thema.name
+        //form
+        //    +question(0)
+        //    +question(1)
+        //    +question(2)
+//script(src='/js/index.js')
+//script(src='/client/testing.js')
