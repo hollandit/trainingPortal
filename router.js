@@ -26,10 +26,10 @@ router
     .post('/api/user', async ctx => {
         await passport.authenticate('local', async(err, user) => {
             if(user === false){
-                await ctx.render('auth', {title: 'Авторизация', message: 'Неверный логин или пароль'});
+                ctx.body = false;
             } else {
                 ctx.login(user, async (err) => {
-                    await err ? ctx.body = err : ctx.redirect('/index');
+                    await err ? ctx.body = err : ctx.body = user;
                 });
             }
         })(ctx)
