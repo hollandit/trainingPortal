@@ -19,5 +19,7 @@
     left: 0;
     width: 100%;
     opacity: 0; }
+  .authForm .error {
+    color: red; }
 
 /*# sourceMappingURL=index.css.map */
