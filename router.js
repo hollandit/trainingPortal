@@ -20,7 +20,7 @@ function rand_array(min, max, array) {
 }
 
 router
-    .get('/', async ctx => {
+    .get('*', async ctx => {
        await ctx.render('index');
     })
     .post('/api/user', async ctx => {
