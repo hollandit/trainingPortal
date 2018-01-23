@@ -1,5 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router';
+import { connect }from 'react-redux';
 import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaiseButtin from 'material-ui/RaisedButton';
@@ -8,21 +9,25 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-export default class UserForm extends React.Component{
+class UserForm extends Component{
     state = {
-        login: "",
-        password: "",
-        error: ""
+        form: {
+            login: "",
+            password: ""
+        },
+        error: "",
+        redirectTo: "",
     };
 
     handleSubmit = e => {
         e.preventDefault();
-        axios.post('/api/user', this.state)
+        this.props.addUser(this.state.form);
+        axios.post('/api/user', this.state.form)
             .then(response => {
                 if (response.data === false){
                     this.setState({ error: 'Неверный логин или пароль'});
                 } else {
-                    return <Redirect to='/index'/>;
+                    this.setState({redirectTo: '/index'});
                 }
             })
             .catch(err => console.log(err));
@@ -31,13 +36,17 @@ export default class UserForm extends React.Component{
     handleChange = e => {
         const { name, value } = e.target;
 
-        this.setState({
-            [name]: value,
-        });
+        this.setState( prevState => ({
+            form: {
+                ...prevState.form,
+                [name]: value,
+            }
+        }));
     };
 
     render(){
-        const { login, password, error } = this.state;
+        const { form, error, redirectTo } = this.state;
+        if(redirectTo) return <Redirect to={redirectTo}/>;
         return(
             <div className='authForm'>
                 <h1>Авторизация</h1>
@@ -48,7 +57,7 @@ export default class UserForm extends React.Component{
                             hintText="Введите логин"
                             name="login"
                             fullWidth={true}
-                            value={login}
+                            value={form.login}
                             required={true}
                             onChange={this.handleChange}
                         />
@@ -59,7 +68,7 @@ export default class UserForm extends React.Component{
                             type="password"
                             name="password"
                             fullWidth={true}
-                            value={password}
+                            value={form.password}
                             required={true}
                             onChange={this.handleChange}
                         />
@@ -72,8 +81,13 @@ export default class UserForm extends React.Component{
         );
     }
 }
-
-ReactDOM.render(
-    <UserForm />,
-    document.getElementById('content')
-);
+export default connect(
+    state => ({
+        login: state
+    }),
+    dispatch => ({
+        addUser: (user) => {
+            dispatch({type: 'ADD_USER', user: user})
+        }
+    })
+)(UserForm)
