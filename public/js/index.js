@@ -1,34 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import  { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { Route, Switch } from 'react-router';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { Route, Switch, Redirect } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import Auth from './component/AuthForm';
-import Home from './component/Home';
+import thunk from 'redux-thunk';
 import Helmet from './aplication';
+import loginReducers from './reducer/loginDucks';
+import Home from "./Home";
+import Auth from "./AuthForm";
 
-function user(state = {}, action){
-    if(action.type === 'ADD_USER'){
-        return [
-            ...state,
-            action.user
-        ];
-    }
-    return state;
-}
+const rootReducer = combineReducers({
+    login: loginReducers,
+});
 
-const store = createStore(user, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunk)
+));
+
+console.log(sessionStorage.getItem('auth'));
 
 ReactDOM.render(
         <div>
         <Helmet title='Авторизация'/>
         <Provider store={store}>
             <BrowserRouter>
-                    <Switch>
-                        <Route exact path='/' component={Auth}/>
-                        <Route path='/index' component={Home}/>
-                    </Switch>
+                <Switch>
+                    <Route path='/' component={Auth}/>
+                    <Route path='/index' render={() => sessionStorage.getItem('auth') !== null ? <Home /> : <Redirect to='/'/>}/>
+                </Switch>
             </BrowserRouter>
         </Provider>
         </div>,

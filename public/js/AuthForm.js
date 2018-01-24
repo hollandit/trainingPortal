@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { connect }from 'react-redux';
-import axios from 'axios';
 import TextField from 'material-ui/TextField';
 import RaiseButtin from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { login } from './reducer/loginDucks';
 
 injectTapEventPlugin();
 
@@ -14,23 +14,12 @@ class UserForm extends Component{
         form: {
             login: "",
             password: ""
-        },
-        error: "",
-        redirectTo: "",
+        }
     };
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.addUser(this.state.form);
-        axios.post('/api/user', this.state.form)
-            .then(response => {
-                if (response.data === false){
-                    this.setState({ error: 'Неверный логин или пароль'});
-                } else {
-                    this.setState({redirectTo: '/index'});
-                }
-            })
-            .catch(err => console.log(err));
+        this.props.login(this.state.form);
     };
 
     handleChange = e => {
@@ -45,12 +34,13 @@ class UserForm extends Component{
     };
 
     render(){
-        const { form, error, redirectTo } = this.state;
-        if(redirectTo) return <Redirect to={redirectTo}/>;
+        const { form } = this.state;
+        const { isLoading, isError, shouldRedirect, errorMessage } = this.props;
+        if (shouldRedirect) return <Redirect to='/index'/>;
         return(
             <div className='authForm'>
                 <h1>Авторизация</h1>
-                <div className='error'>{error}</div>
+                <div className='error'>{isError && errorMessage}</div>
                 <form onSubmit={this.handleSubmit}>
                     <MuiThemeProvider>
                         <TextField
@@ -81,13 +71,16 @@ class UserForm extends Component{
         );
     }
 }
-export default connect(
-    state => ({
-        login: state
-    }),
-    dispatch => ({
-        addUser: (user) => {
-            dispatch({type: 'ADD_USER', user: user})
-        }
-    })
-)(UserForm)
+
+const mapStateToProps = state => ({
+    isLoading: state.login.isLoading,
+    isError: state.login.isError,
+    shouldRedirect: state.login.shouldRedirect,
+    errorMessage: state.login.errorMessage,
+});
+
+const mapDispatchToProps = {
+    login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm)
