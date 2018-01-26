@@ -5,4 +5,6 @@ export const WithHelmet = ({ children, ...helmetProps }) => {
   return (
     <Helmet {...helmetProps}>{children}</Helmet>
   )
-}
+};
+
+export default WithHelmet;
