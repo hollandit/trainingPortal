@@ -3,12 +3,20 @@ import Helmet from 'react-helmet';
 
 export const WithHelmet = ({ children, ...helmetProps }) => {
   return (
-    <Helmet {...helmetProps}>{children}</Helmet>
+    <React.Fragment>
+      <Helmet>
+        {helmetProps.title && (
+          <title>{helmetProps.title}</title>
+        )}
+      </Helmet>
+
+      {children}
+    </React.Fragment>
   )
 };
 
-export const withHelmet = helmetProps => BaseComponent => (
-  <Helmet {...helmetProps}><BaseComponent /></Helmet>
+export const withHelmet = helmetProps => BaseComponent => props => (
+  <WithHelmet {...helmetProps}><BaseComponent {...props} /></WithHelmet>
 );
 
 export default WithHelmet;
