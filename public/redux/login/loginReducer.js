@@ -23,8 +23,7 @@ export default (state = initialState, action) => {
                 ...state,
                 user: payload,
                 isLoading: false,
-                isLoggedIn: true,
-                auth: true,
+                shouldRedirect: true
             };
         case actions.LOGIN_ERROR:
             return {
