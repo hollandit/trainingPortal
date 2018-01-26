@@ -11,6 +11,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['public/client']),
     ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.scss'],
+    },
     module: {
         rules: [
             {
@@ -30,5 +33,4 @@ module.exports = {
             }
         ]
     },
-    watch: true
 };
