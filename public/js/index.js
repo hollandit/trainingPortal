@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import Helmet from './aplication';
 import loginReducer from './redux/login/loginReducer';
 import AuthProvider from './containers/AuthProvider';
-import Home from "./Home";
+import Home from "./component/Home";
 import Auth from "./AuthForm";
 
 const rootReducer = combineReducers({
