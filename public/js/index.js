@@ -29,9 +29,9 @@ ReactDOM.render(
             <BrowserRouter>
               <AuthProvider authComponent={withHelmet({ title: 'Авторизация'})(Auth)}>
                 <Route path='/' strict>
-                  {/*<WithHelmet title='Главная страница'>*/}
-                    {/*<Home />*/}
-                  {/*</WithHelmet>*/}
+                  <WithHelmet title='Главная страница'>
+                    <Home />
+                  </WithHelmet>
                 </Route>
               </AuthProvider>
             </BrowserRouter>
