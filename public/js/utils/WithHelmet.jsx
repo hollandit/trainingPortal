@@ -7,4 +7,8 @@ export const WithHelmet = ({ children, ...helmetProps }) => {
   )
 };
 
+export const withHelmet = helmetProps => BaseComponent => (
+  <Helmet {...helmetProps}><BaseComponent /></Helmet>
+);
+
 export default WithHelmet;
