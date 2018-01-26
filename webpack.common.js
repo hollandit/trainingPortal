@@ -12,7 +12,7 @@ module.exports = {
         new CleanWebpackPlugin(['public/client']),
     ],
     resolve: {
-      extensions: ['js', 'jsx', 'scss'],
+      extensions: ['.js', '.jsx', '.scss'],
     },
   module: {
         rules: [
