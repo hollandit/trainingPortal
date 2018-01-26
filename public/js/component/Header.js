@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 
 export default class Header extends Component{
+    logout = () => {
+        localStorage.removeItem('persist:root');
+    };
     render(){
+        if(!localStorage.getItem('persist:root')) {
+            return <Redirect to='/'/>;
+        }
         return(
             <nav className="navbar navbar-light bg-faded">
                 <h1 className="navbar-brand">Holland</h1>
@@ -26,7 +33,7 @@ export default class Header extends Component{
                         </form>
                     </li>
                     <li className="nav-item pull-xs-right">
-                        <Link to="#" className="nav-link">Выйти</Link>
+                        <label className="nav-link" onClick={this.logout}>Выйти</label>
                     </li>
                 </ul>
             </nav>
