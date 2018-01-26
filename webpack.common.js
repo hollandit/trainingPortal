@@ -11,7 +11,10 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['public/client']),
     ],
-    module: {
+    resolve: {
+      extensions: ['js', 'jsx', 'scss'],
+    },
+  module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
