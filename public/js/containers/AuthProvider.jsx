@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const AuthProvider = ({ authenticated, authComponent, children }) => {
-  return authenticated ? children : authComponent;
+  return authenticated ? children : React.createElement(authComponent);
 };
 
 export default connect(state => ({

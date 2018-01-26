@@ -7,12 +7,13 @@ import { Route, Switch, Redirect } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import Helmet from './aplication';
-import loginReducers from './reducer/loginDucks';
+import loginReducer from './redux/login/loginReducer';
+import AuthProvider from './containers/AuthProvider';
 import Home from "./Home";
 import Auth from "./AuthForm";
 
 const rootReducer = combineReducers({
-    login: loginReducers,
+    login: loginReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -24,15 +25,15 @@ console.log(sessionStorage.getItem('auth'));
 
 ReactDOM.render(
         <div>
-        <Helmet title='Авторизация'/>
-        <Provider store={store}>
+          <Helmet title='Авторизация'/>
+          <Provider store={store}>
             <BrowserRouter>
-                <Switch>
-                    <Route path='/' component={Auth}/>
-                    <Route path='/index' render={() => sessionStorage.getItem('auth') !== null ? <Home /> : <Redirect to='/'/>}/>
-                </Switch>
+              <AuthProvider authComponent={Auth}>
+                <Route path='/' strict><Home /></Route>
+              </AuthProvider>
             </BrowserRouter>
-        </Provider>
+          </Provider>
         </div>,
     document.getElementById('content')
 );
+
