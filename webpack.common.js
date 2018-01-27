@@ -12,9 +12,9 @@ module.exports = {
         new CleanWebpackPlugin(['public/client']),
     ],
     resolve: {
-      extensions: ['.js', '.jsx', '.scss'],
+        extensions: ['.js', '.jsx', '.scss'],
     },
-  module: {
+    module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
@@ -33,5 +33,4 @@ module.exports = {
             }
         ]
     },
-    watch: true
 };
