@@ -13,7 +13,7 @@ import loginReducer from '../redux/login/loginActions';
 import AuthProvider from './containers/AuthProvider';
 import Auth from "./AuthForm";
 import Home from "./component/Home";
-import { WithHelmet, withHelmet } from "./utils/WithHelmet";
+import { WithHelmet, withHelmet } from "./utils/WithHelmet"
 
 const rootReducer = combineReducers({
     login: loginReducer,
@@ -49,20 +49,19 @@ const store = createStore(rootReducer, composeEnhancers(
 //     document.getElementById('content')
 // );
 ReactDOM.render(
-    <div>
-        <Provider store={store}>
-            {/*<PersistGate loading={null} persistor={persisrtor}>*/}
-                <BrowserRouter>
-                    <AuthProvider authComponent={withHelmet({ title: 'Авторизация'})(Auth)}>
-                      <Route path='/' strict>
-                        <WithHelmet title='Главная страница'>
-                          <Home />
-                        </WithHelmet>
-                      </Route>
-                    </AuthProvider>
-                </BrowserRouter>
-            {/*</PersistGate>*/}
-        </Provider>
-    </div>,
+        <div>
+          <Provider store={store}>
+            <BrowserRouter>
+              <AuthProvider authComponent={withHelmet({ title: 'Авторизация'})(Auth)}>
+                <Route path='/' strict>
+                  <WithHelmet title='Главная страница'>
+                    <Home />
+                  </WithHelmet>
+                </Route>
+              </AuthProvider>
+            </BrowserRouter>
+          </Provider>
+        </div>,
     document.getElementById('content')
 );
+
