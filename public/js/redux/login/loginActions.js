@@ -27,7 +27,7 @@ export const loginError = data => {
 
 export const logout = () => {
   sessionStorage.removeItem('auth');
-  return {};
+  return {type: LOGOUT};
 };
 
 export const login = form => async dispatch => {

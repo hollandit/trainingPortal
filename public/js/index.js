@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import  { Provider } from 'react-redux';
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { Route, Switch, Redirect } from 'react-router';
+import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 import loginReducer from './redux/login/loginReducer';
@@ -20,8 +20,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
-
-console.log(sessionStorage.getItem('auth'));
 
 ReactDOM.render(
         <div>

@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../redux/login/loginActions';
+import { Redirect } from 'react-router';
 
-export default class Header extends Component{
+class Header extends Component{
+    logoutAccount = () => {
+        this.props.logout();
+    };
     render(){
+        const { user } = this.props;
+        if(!user) return <Redirect to='/'/>;
         return(
             <nav className="navbar navbar-light bg-faded">
                 <h1 className="navbar-brand">Holland</h1>
@@ -26,10 +34,18 @@ export default class Header extends Component{
                         </form>
                     </li>
                     <li className="nav-item pull-xs-right">
-                        <Link to="#" className="nav-link">Выйти</Link>
+                        <Link to="#" className="nav-link" onClick={this.logoutAccount}>Выйти</Link>
                     </li>
                 </ul>
             </nav>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    user: state.login.user
+});
+const mapDispatchToProps = {
+    logout,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
