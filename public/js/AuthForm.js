@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaiseButtin from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { login } from './redux/login/loginActions';
+import { login } from '../redux/login/loginActions';
 
 injectTapEventPlugin();
 
