@@ -22,10 +22,8 @@ class Home extends Component{
         );
     }
 }
-const mapStateToProps = state => {
-    return {
-        user: state.login.user
-    }
-};
+const mapStateToProps = state => ({
+    user: state.login.user
+});
 
 export default connect(mapStateToProps)(Home);
