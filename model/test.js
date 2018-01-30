@@ -1,6 +1,9 @@
 const db = require('../bin/db');
 
 let Test = {
+    allThemes: function(){
+        return requestAll('SELECT id, name FROM thema');
+    },
     test: function(id){
         return requestTest('SELECT * FROM questions WHERE id_theme = ?', id);
     },
@@ -20,11 +23,22 @@ let Test = {
     }
 };
 
-function requestTest(sql, req) {
+function requestTest(sql, req = null) {
     return new Promise((resolve, reject) => {
         db.query(
             sql,
-            [req],
+            !req ? '': [req],
+            (err, rows) => {
+                if(err) reject(err);
+                resolve(rows);
+            });
+    });
+}
+
+function requestAll(sql) {
+    return new Promise((resolve, reject) => {
+        db.query(
+            sql,
             (err, rows) => {
                 if(err) reject(err);
                 resolve(rows);
