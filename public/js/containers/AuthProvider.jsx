@@ -7,4 +7,4 @@ const AuthProvider = ({ authenticate, authComponent, children}) => {
 
 export default connect(state => ({
     authenticate: Boolean(state.login.user)
-}))(AuthProvider)
+}))(AuthProvider);
