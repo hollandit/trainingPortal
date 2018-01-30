@@ -20,13 +20,16 @@ function rand_array(min, max, array) {
 }
 
 router
-    .get('*', async ctx => {
-       await ctx.render('index');
+    .get('/api/test-thema', async ctx => {
+        ctx.body = await Test.allThemes();
     })
     .get('/api/logout', async ctx => {
         console.log('router');
         ctx.logout();
         console.log(ctx.state.user);
+    })
+    .get('*', async ctx => {
+        await ctx.render('index');
     })
     .post('/api/user', async ctx => {
         await passport.authenticate('local', async(err, user) => {
