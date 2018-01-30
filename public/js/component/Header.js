@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../redux/login/loginActions';
 import { Redirect } from 'react-router';
@@ -12,6 +12,7 @@ class Header extends Component{
         const { user } = this.props;
         if(!user) return <Redirect to='/'/>;
         return(
+            <BrowserRouter>
             <nav className="navbar navbar-light bg-faded">
                 <h1 className="navbar-brand">Holland</h1>
                 <ul className="nav navbar-nav">
@@ -38,6 +39,7 @@ class Header extends Component{
                     </li>
                 </ul>
             </nav>
+            </BrowserRouter>
         );
     }
 }

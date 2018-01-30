@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 // import { theme } from '../redux/test/testActions';
 import axios from 'axios';
 
@@ -32,13 +32,15 @@ class Home extends Component{
                 <div>Должность: </div>
 
                 <h3>Доступные тесты: </h3>
-                    <ul>
-                        {this.state.item.map(item => (
-                            <li key={item.id}>
-                                <Link to={`/test/${item.id}`}>{item.name}</Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <BrowserRouter>
+                        <ul>
+                            {this.state.item.map(item => (
+                                <li key={item.id}>
+                                    <Link to={`/test/${item.id}`}>{item.name}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </BrowserRouter>
                 <h3>Доступные тренинги: </h3>
             </div>
         );
